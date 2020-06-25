@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .container{
+            background-color:  #ff0000;
+            padding: 10px;
+        }
+
+        .clearfix::after{
+            content:"\20";
+            display: block;
+            height: 0;
+            clear: both;
+        }
+
+        .clearfix{
+            zoom:1; /*需要添加zoom: 1（触发haslayout），才能支持IE6和IE7浏览器*/
+        }
+
+        .floatleft{
+            background-color:  #000;
+            float: left;
+            height: 30px;
+            width: 50%;
+            color: white;
+        }
+        .floatright{
+            background-color:  #0ff;
+            float: right;
+            height: 30px;
+            width: 49%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container clearfix">
+        <div>为了防止父类块级元素高度坍塌，在父级元素的 css 中使用伪元素clearfix::after</div>
+        <div class="floatleft">child float left</div>
+        <div class="floatright">child float right</div>
+    </div>
+</body>
+</html>

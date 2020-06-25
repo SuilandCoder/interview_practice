@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关联属性</title>
+
+    <style>
+        body {
+            counter-reset: action;
+        }
+
+        .action {
+            display: block;
+        }
+
+        .action::before {
+            counter-increment: action;
+            content: counter(action) ".";
+        }
+
+        h3 {
+            margin-left: 30px;
+            margin-bottom: 30px;
+        }
+
+        a {
+            margin-left: 50px;
+        }
+
+        .demo_box {
+            border: 1px solid #3DA5DC;
+            background: #a4dcf9;
+            height: 100px;
+            width: 200px;
+            text-align: center;
+            color: #fff;
+            margin: 30px;
+            display: inline-block;
+        }
+
+        .origin_1 {
+            -webkit-transform-origin: center center;
+            -moz-transform-origin: center center;
+            -webkit-transition: 0.5s ease all;
+            -moz-transition: 0.5s ease all;
+        }
+
+        .origin_2 {
+            -webkit-transform-origin: left top;
+            -moz-transform-origin: left top;
+            -webkit-transition: 0.5s ease all;
+            -moz-transition: 0.5s ease all;
+        }
+
+        .origin_3 {
+            -webkit-transform-origin: 50% 100%;
+            -moz-transform-origin: 50% 100%;
+            -webkit-transition: 0.5s ease all;
+            -moz-transition: 0.5s ease all;
+        }
+
+        .origin_4 {
+            -webkit-transform-origin: 20px 60px;
+            -moz-transform-origin: 20px 60px;
+            -webkit-transition: 0.5s ease all;
+            -moz-transition: 0.5s ease all;
+        }
+
+        .origin_1:hover,
+        .origin_2:hover,
+        .origin_3:hover,
+        .origin_4:hover {
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+        }
+
+        .demo_box:hover {
+            -webkit-animation-play-state: paused;
+            -moz-animation-play-state: paused;
+        }
+
+        .origin {
+            -webkit-animation: demo_box 4s infinite linear;
+        }
+
+
+
+        @-webkit-keyframes demo_box {
+            0% {
+                -webkit-transform: perspective(500px) rotateX(0deg);
+            }
+
+            100% {
+                -webkit-transform: perspective(500px) rotateX(360deg);
+            }
+        }
+
+        .show {
+            -webkit-backface-visibility: visible;
+            -moz-backface-visibility: visible;
+        }
+
+        .hidden {
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+        }
+
+        .mod_run_code {
+            -webkit-perspective-origin: right top;
+            -moz-perspective-origin: right top;
+            -moz-transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            -webkit-transform: perspective(500px);
+            -moz-transform: perspective(500px);
+        }
+
+
+
+        .demo_box4 {
+            background: none;
+            width: 700px;
+            height: 300px;
+            border: none;
+        }
+
+        .perspective {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            float: left;
+            margin: 20px;
+            -webkit-transform: perspective(300px);
+            -moz-transform: perspective(300px);
+        }
+
+        .m3d {
+            -moz-transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+        }
+
+        .perspective span {
+            display: block;
+            position: absolute;
+            width: 198px;
+            height: 198px;
+            font-size: 120px;
+            line-height: 198px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid #333;
+
+        }
+
+        .front {
+            -webkit-transform: rotateY(0deg) translateZ(100px);
+            -moz-transform: rotateY(0deg) translateZ(100px);
+        }
+
+        .back {
+            -webkit-transform: rotateY(180deg) translateZ(100px);
+            -moz-transform: rotateY(180deg) translateZ(100px);
+        }
+
+        .right {
+            -webkit-transform: rotateY(90deg) translateZ(100px);
+            -moz-transform: rotateY(90deg) translateZ(100px);
+        }
+
+        .left {
+            -webkit-transform: rotateY(-90deg) translateZ(100px);
+            -moz-transform: rotateY(-90deg) translateZ(100px);
+        }
+
+        .top {
+            -webkit-transform: rotateX(90deg) translateZ(100px);
+            -moz-transform: rotateX(90deg) translateZ(100px);
+        }
+
+        .bottom {
+            -webkit-transform: rotateX(-90deg) translateZ(100px);
+            -moz-transform: rotateX(-90deg) translateZ(100px);
+        }
+    </style>
+</head>
+
+<body>
+    <h3>transform操作：</h3>
+    <a class="action" href="#transform">transform-origin[变形原点]</a>
+    <a class="action" href="#perspective">perspective-origin[透视原点]</a>
+    <a class="action" href="#backface">backface-visibility[隐藏内容的背面]</a>
+    <a class="action" href="#style">transform-style[3D呈现]</a>
+
+    <h3 id="transform">1. transform-origin[变形原点]</h3>
+
+    <div class="box_4_room" style="background-color: teal;display: flex;justify-content: space-between;">
+        <div class="demo_box origin_1">在中心点旋转45度</div>
+        <div class="demo_box origin_2">在左上角旋转45度</div>
+        <div class="demo_box origin_3">用百分百值来来设置旋转点旋转45度</div>
+        <div class="demo_box origin_4">用长度值来设置旋转点旋转45度</div>
+    </div>
+
+    <h3 id="perspective">2. perspective-origin[透视原点]</h3>
+
+    <div class="demo_box origin mod_run_code ">透视为500px</div>
+
+    <h3 id="backface">3. backface-visibility[隐藏内容的背面]</h3>
+
+    <ol style="margin-left: 50px;">
+        <li>visible：默认值，旋转的时候背景可见。</li>
+        <li>hidden：旋转的时候背景不可见。</li>
+    </ol>
+
+    <div class="demo_box show origin">背景可见</div>
+    <div class="demo_box hidden origin">背景隐藏</div>
+
+    <h3 id="style">4. transform-style[3D呈现]</h3>
+    <ol style="margin-left: 50px;">
+        <li>flat：所有子元素在 2D 平面呈现。</li>
+        <li>preserve-3d：保留3D空间。</li>
+    </ol>
+
+    <div class="demo_box4">
+        <div class="perspective">
+            <span class="front">1</span>
+            <span class="back">2</span>
+            <span class="right">3</span>
+            <span class="left">4</span>
+            <span class="top">5</span>
+            <span class="bottom">6</span>
+        </div>
+        <div class="perspective m3d">
+            <span class="front">1</span>
+            <span class="back">2</span>
+            <span class="right">3</span>
+            <span class="left">4</span>
+            <span class="top">5</span>
+            <span class="bottom">6</span>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动画</title>
+    <style>
+        body {
+            counter-reset: action;
+        }
+
+        .action {
+            display: block;
+        }
+
+        .action::before {
+            counter-increment: action;
+            content: counter(action) ".";
+        }
+
+        h3 {
+            margin-left: 30px;
+            /* margin-bottom: 30px; */
+        }
+
+        a {
+            margin-left: 50px;
+        }
+
+        .demo_box {
+            border: 1px solid #3DA5DC;
+            background: #a4dcf9;
+            height: 100px;
+            width: 200px;
+            text-align: center;
+            color: #fff;
+            /* margin-top: 30px; */
+            margin-left: 30px;
+            display: inline-block;
+        }
+
+        .animation_name {
+            -webkit-animation: 0.5s 0.5s ease infinite alternate;
+            -webkit-animation-name: name_demo;
+        }
+
+        @-webkit-keyframes name_demo {
+            0% {
+                width: 200px;
+            }
+
+            100% {
+                width: 400px;
+            }
+        }
+
+        .animation_duration {
+            -webkit-animation: 0.5s ease 1 forwards;
+            -webkit-animation-duration: 2s;
+            -webkit-animation-name: duration_demo;
+            -webkit-animation-iteration-count: infinite;
+        }
+
+        @-webkit-keyframes duration_demo {
+            0% {
+                width: 200px;
+            }
+
+            50% {
+                width: 400px;
+            }
+
+            100% {
+                width: 200px;
+            }
+        }
+
+        .demo_box_2 {
+            border: 1px solid #3DA5DC;
+            background: #a4dcf9;
+            -webkit-animation: f1 2s 0.5s forwards;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-duration: 2s;
+            display: inline-block;
+            width: 200px;
+            height: 100px;
+            border-radius: 50px;
+            margin: 10px 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .ease {
+            -webkit-animation-timing-function: ease;
+            -moz-animation-timing-function: ease;
+        }
+
+        .linear {
+            -webkit-animation-timing-function: linear;
+            -moz-animation-timing-function: linear;
+        }
+
+        .ease-in {
+            -webkit-animation-timing-function: ease-in;
+            -moz-animation-timing-function: ease-in;
+        }
+
+        .ease-out {
+            -webkit-animation-timing-function: ease-out;
+            -moz-animation-timing-function: ease-out;
+        }
+
+        .ease-in-out {
+            -webkit-animation-timing-function: ease-in-out;
+            -moz-animation-timing-function: ease-in-out;
+        }
+
+        .step-start {
+            -webkit-animation-timing-function: step-start;
+            -moz-animation-timing-function: step-start
+        }
+
+        .step-end {
+            -webkit-animation-timing-function: step-end;
+            -moz-animation-timing-function: step-end;
+        }
+
+        .steps {
+            -webkit-animation-timing-function: steps(2);
+            -moz-animation-timing-function: steps(2)
+        }
+
+        .cubic-bezier {
+            -webkit-animation-timing-function: cubic-bezier(0.52, 0, 0.58, 1.0);
+            -moz-animation-timing-function: cubic-bezier(0.52, 0, 0.58, 1.0);
+        }
+
+        @-webkit-keyframes f1 {
+            0% {
+                height: 100px;
+            }
+
+            50% {
+                height: 200px;
+            }
+
+            100% {
+                height: 100px;
+            }
+        }
+
+        .no_delay {
+            -webkit-animation: f1 2s forwards ease infinite;
+            -webkit-animation-delay: 0;
+            -moz-animation-delay: 0;
+
+        }
+
+        .delay_2s {
+            -webkit-animation: f1 2s forwards ease infinite;
+            -webkit-animation-delay: 1s;
+            -moz-animation-delay: 1s;
+        }
+
+        .delay_-1s {
+            -webkit-animation: f1 2s forwards ease infinite;
+            -webkit-animation-delay: -1.5s;
+            -moz-animation-delay: -1.5s;
+
+        }
+
+        @-webkit-keyframes f2 {
+            0% {
+                top: 0px;
+            }
+
+            100% {
+                top: 100px;
+            }
+        }
+
+        .pos {
+            -webkit-animation: f2 2s 0.5s infinite forwards linear;
+            position: relative;
+        }
+
+        .normal {
+            -webkit-animation-direction: normal;
+            -moz-animation-direction: normal;
+        }
+
+        .reverse {
+            -webkit-animation-direction: reverse;
+            -moz-animation-direction: reverse;
+        }
+
+        .alternate {
+            -webkit-animation-direction: alternate;
+            -moz-animation-direction: alternate;
+        }
+
+        .alternate-reverse {
+            -webkit-animation-direction: alternate-reverse;
+            -moz-animation-direction: alternate-reverse;
+        }
+
+        .pos2 {
+            -webkit-animation: f2 2s 0.5s 1 linear;
+            position: relative;
+        }
+
+        .forwards {
+            -webkit-animation-fill-mode: forwards;
+            -moz-animation-fill-mode: forwards;
+        }
+
+        .backwards {
+            -webkit-animation-fill-mode: backwards;
+            -moz-animation-fill-mode: backwards;
+        }
+
+        .play-state {
+            -webkit-animation: f2 2s 0.5s infinite linear forwards alternate;
+            position: relative;
+        }
+
+        .play-state:hover {
+            -webkit-animation-play-state: paused;
+            -moz-animation-play-state: paused;
+        }
+
+        .play-state2 {
+            -webkit-animation: f2 2s 0.5s infinite linear forwards alternate;
+            position: relative;
+            -webkit-animation-play-state: paused;
+        }
+
+        .play-state2:hover {
+            -webkit-animation-play-state: running;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>animation 操作：</h3>
+    <a class="action" href="#name">animation-name[动画名称]</a>
+    <a class="action" href="#duration">animation-duration[动画时间]</a>
+    <a class="action" href="#function">animation-timing-function[播放方式]</a>
+    <a class="action" href="#delay">animation-delay[开始播放时间]</a>
+    <a class="action" href="#count">animation-iteration-count[播放次数]</a>
+    <a class="action" href="#direction">animation-direction[播放方向]</a>
+    <a class="action" href="#mode">animation-fill-mode[播放后的状态]</a>
+    <a class="action" href="#state">animation-play-state[对象动画的状态]</a>
+
+
+    <h3 id="name">1. animation-name[动画名称]</h3>
+    <p style="margin-left: 50px;">animation-name: none | (identifier) [ , none | (identifier) ]*;定义一个或多个动画名称。</p>
+    <p style="margin-left: 50px;">检索或设置对象所应用的动画名称，必须与规则@keyframes配合使用，因为动画名称由@keyframes定义 如果提供多个属性值，以逗号进行分隔。</p>
+    <p style="margin-left: 50px;">
+        @keyframes相当于一个命名空间，后面跟一个名词，如果在class中的animation-name定义了与之对应的name，那么就可以执行动画了。定义动画时，简单的动画可以直接使用关键字from和to，即从一种状态过渡到另一种状态
+    </p>
+
+    <div class="demo_box animation_name">宽度200->400</div>
+
+    <h3 id="duration">2. animation-duration[动画时间]</h3>
+    <p style="margin-left: 50px;">animation-duration: (time)[,(time)]*; 指定对象动画的持续时间 。</p>
+    <p style="margin-left: 50px;">检索或设置对象动画的持续时间</p>
+    <div class="demo_box animation_duration">每次运行两秒，运行了十次</div>
+
+    <h3 id="function">3. animation-timing-function[播放方式]</h3>
+    <p style="margin-left: 50px;">animation-timing-function: linear | ease | ease-in | ease-out | ease-in-out |
+        step-start | step-end | steps((number)[, [ start | end ] ]?) | cubic-bezier((number), (number), (number),
+        (number)) [, linear | ease | ease-in | ease-out | ease-in-out | step-start | step-end | steps(
+        (number)[, [ start | end ] ]?) | cubic-bezier((number), (number), (number), (number)) ]*;
+        指定对象动画的持续时间 。
+    </p>
+
+    <ol style="margin-left: 50px;">
+        <li>ease：缓解效果，等同于cubic-bezier(0.25,0.1,0.25,1.0)函数，既立方贝塞尔。</li>
+        <li>linear：线性效果，等同于cubic-bezier(0.0,0.0,1.0,1.0)函数。</li>
+        <li>ease-in：渐显效果，等同于cubic-bezier(0.42,0,1.0,1.0)函数。</li>
+        <li>ease-out：渐隐效果，等同于cubic-bezier(0,0,0.58,1.0)函数。</li>
+        <li>ease-in-out：渐显渐隐效果，等同于cubic-bezier(0.42,0,0.58,1.0)函数。</li>
+        <li>step-start：马上转跳到动画结束状态。</li>
+        <li>step-end：保持动画开始状态，直到动画执行时间结束，马上转跳到动画结束状态。</li>
+        <li>steps(<number>[, [ start | end ]
+                ]?)：第一个参数number为指定的间隔数，即把动画分为n步阶段性展示，第二个参数默认为end，设置最后一步的状态，start为结束时的状态，end为开始时的状态，若设置与animation-fill-mode的效果冲突，而以animation-fill-mode的设置为动画结束的状态。
+        </li>
+        <li>cubic-bezier(<number>, <number>, <number>, <number>)：特殊的立方贝塞尔曲线效果。</li>
+    </ol>
+
+    <div class="box_4_room" style="background-color: teal;display: flex;justify-content: space-between;">
+        <div class="demo_box_2 ease">ease</div>
+        <div class="demo_box_2 linear">linear</div>
+        <div class="demo_box_2 ease-in">ease-in</div>
+        <div class="demo_box_2 ease-out">ease-out</div>
+        <div class="demo_box_2 ease-in-out">ease-in-out</div>
+        <div class="demo_box_2 step-start">step-start</div>
+        <div class="demo_box_2 step-end">step-end</div>
+        <div class="demo_box_2 steps">steps(2)</div>
+        <div class="demo_box_2 cubic-bezier">cubic-bezier(0.52,0,0.58,1.0)</div>
+    </div>
+
+    <h3 id="delay">4. animation-delay[开始播放时间]</h3>
+    <div class="box_4_room" style="height:200px;background-color: teal;display: flex;justify-content: space-between;">
+        <div class="demo_box no_delay">动画立即执行</div>
+        <div class="demo_box delay_2s">动画延迟1秒执行</div>
+        <div class="demo_box delay_-1s">动画前1.5秒被截断</div>
+    </div>
+
+
+    <h3 id="count">5. animation-iteration-count[播放次数]</h3>
+    略
+
+    <h3 id="direction">6. animation-direction[播放方向]</h3>
+    <ol style="margin-left: 50px;">
+        <li>normal：正常方向。</li>
+        <li>reverse：动画反向运行,方向始终与normal相反。（FF14.0.1以下不支持）。</li>
+        <li>alternate：动画会循环正反方向交替运动，奇数次（1、3、5……）会正常运动，偶数次（2、4、6……）会反向运动，即所有相关联的值都会反向。</li>
+        <li>alternate-reverse：动画从反向开始，再正反方向交替运动，运动方向始终与alternate定义的相反。（FF14.0.1以下不支持）</li>
+    </ol>
+
+    <div class="box_4_room" style="height:200px;background-color: teal;">
+        <div class="demo_box pos normal">normal</div>
+        <div class="demo_box pos reverse">reverse</div>
+        <div class="demo_box pos alternate">alternate</div>
+        <div class="demo_box pos alternate-reverse">alternate-reverse</div>
+    </div>
+
+    <h3 id="mode">7. animation-fill-mode[播放后的状态]</h3>
+    <ol style="margin-left: 50px;">
+        <li>none：默认值。不设置对象动画之外的状态</li>
+        <li>forwards：结束后保持动画结束时的状态，但当animation-direction为0，则动画不执行，持续保持动画开始时的状态</li>
+        <li>backwards：结束后返回动画开始时的状态</li>
+        <li>both：结束后可遵循forwards和backwards两个规则</li>
+    </ol>
+
+    <div class="box_4_room" style="height:210px;background-color: teal;">
+        <div class="demo_box pos2 forwards">我留在终点</div>
+        <div class="demo_box pos2 backwards">我只回到原点</div>
+    </div>
+
+    <h3 id="state">8. animation-play-state[[对象动画的状态]]</h3>
+    <ol style="margin-left: 50px;">
+        <li>running：默认值。运动</li>
+        <li>paused：暂停</li>
+    </ol>
+
+    <div class="box_4_room" style="height:210px;background-color: teal;">
+        <div class="demo_box play-state">鼠标移过来就停，移走就动</div>
+        <div class="demo_box play-state2">鼠标移过来就动</div>
+    </div>
+
+</body>
+
+</html>

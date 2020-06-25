@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #amazing{
+            width:200px;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="border: 1px #000 solid;">H1 标签</h1>
+    <h2 style="border: 1px #000 solid;">H2 标签</h2> 
+    <p  style="border: 1px #f00 solid;background-color: #f00;" id = "amazing">我是一个p标签amazing，float right，宽度200px，浏览器遇到浮动元素时，会把它尽可能放在最后边，还会从流中删除这个段落，就好像它浮在页面上，浮动元素不再是正常流的一部分; </p>
+    <h2 style="border: 1px #000 solid;" >H2 标签；HTML布局中，位于浮动元素amazing下面；由于浮动段落已经从正常流中删除，所以其他块元素会填在这里。text内容是内联的，内联元素定位时，会考虑浮动元素的边界，因此会围绕浮动元素；</h2>
+
+    <p style="border: 1px #000 solid;clear: right;">
+        p标签，样式增加 clear:right 属性；clear:当元素流入页面时，在这个元素左边、右边或两边都不允许有浮动内容。浏览器在页面放置元素时，它会查看页脚右边有没有一个浮动元素，如果有，就会把页脚下移，直到它右边没有浮动内容为止。
+    </p>
+
+    <div >
+        <h2>总结：</h2>
+        <ol>
+            <li>float元素，不属于正常流的一部分，浏览器会从正常流中删除这个元素；</li>
+            <li>块级元素会忽略float元素，因此会被覆盖</li>
+            <li>内联元素会留意浮动元素的边界，围绕浮动元素</li>
+            <li>clear属性会清除块级元素左右两边的float元素（块级元素下移到没有float元素的地方）</li>
+        </ol>
+    </div>
+
+</body>
+</html>

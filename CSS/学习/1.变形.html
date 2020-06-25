@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>变形</title>
+
+    <style>
+        body {
+            counter-reset: action;
+        }
+
+        h3 {
+            margin-left: 30px;
+            margin-bottom: 30px;
+        }
+
+        a{
+            margin-left: 50px;
+        }
+
+        .action {
+            display: block;
+        }
+
+        .action::before {
+            counter-increment: action;
+            content: counter(action) ".";
+        }
+
+        .demo_box {
+            border: 1px solid #3DA5DC;
+            background: #a4dcf9;
+            height: 100px;
+            width: 200px;
+            text-align: center;
+            color: #fff;
+            margin-top: 30px;
+            margin-left: 30px;
+        }
+
+        .demo_rotate {
+            /* -webkit-transform: 1s ease all; */
+            /* -moz-transform: 1s ease all; */
+            transition-duration: 1s;
+            padding: 10px;
+            margin: 90px auto;
+        }
+
+        .demo_rotate:hover {
+            -webkit-transform: rotate(360deg) scale(1.2, 1.2);
+            -moz-transform: rotate(360deg) scale(1.2, 1.2);
+            transform: rotate(360deg) scale(1.2, 1.2);
+            background: #ff9900;
+        }
+
+
+        .rotate_clockwise {
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            display: inline-block;
+        }
+
+        .rotate_anticlockwise {
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            display: inline-block;
+        }
+
+        .rotateX {
+            -webkit-transform: perspective(800px) rotateX(60deg);
+            -moz-transform: perspective(800px) rotateX(60deg);
+            display: inline-block;
+        }
+
+        .rotateY {
+            -webkit-transform: perspective(800px) rotateY(60deg);
+            -moz-transform: perspective(800px) rotateY(60deg);
+            display: inline-block;
+        }
+
+        .rotateZ {
+            -webkit-transform: perspective(800px) rotateZ(60deg);
+            -moz-transform: perspective(800px) rotateZ(60deg);
+            display: inline-block;
+        }
+
+        .scale_1,
+        .scale_2,
+        .scale_3 {
+            display: inline-block;
+            transition-duration: 1s;
+        }
+
+        .scale_1:hover {
+            -webkit-transform: scaleX(0.8) scaleY(1.2);
+        }
+
+        .scale_2:hover {
+            -webkit-transform: scaleX(0.5) scaleY(0.5);
+        }
+
+        .scale_3:hover {
+            -webkit-transform: scale(-1, 1);
+        }
+
+        .translate_1,
+        .translate_2 {
+            transition-duration: 1s;
+        }
+
+        .translate_1:hover {
+            -webkit-transform: translate(100px);
+        }
+
+        .translate_2:hover {
+            -webkit-transform: translate(-100px);
+        }
+
+        .skew_1,
+        .skew_2,
+        .skew_3{
+            transition-duration: 1s;
+        }
+
+        .skew_1:hover{
+            -webkit-transform: skewX(45deg) skewY(20deg);
+        }
+
+        .skew_2:hover{
+            -webkit-transform: skew(-45deg,-20deg);
+        }
+
+        .skew_3:hover{
+            -webkit-transform: skew(-45deg,-45deg);
+        }
+
+    </style>
+</head>
+
+<body>
+    <h3>transform操作：</h3>
+    <a class="action" href="#rotate">旋转rotate</a>
+    <a class="action" href="#scale">缩放scale</a>
+    <a class="action" href="#translate">移动translate</a>
+    <a class="action" href="#skew">倾斜skew</a>
+    <a class="action" href="#matrix">矩阵变形matrix</a>
+
+
+
+    <h3>0. 小试牛刀</h3>
+
+    <div class="demo_box demo_rotate">鼠标经过变大1.2倍、旋转360度并改变背景色。</div>
+
+    <h3 id="rotate">1. 旋转 rotate</h3>
+
+    <div>
+        <div class="demo_box rotate_clockwise">顺时针旋转45度</div>
+        <div class="demo_box rotate_anticlockwise">逆时针旋转45度</div>
+        <div class="demo_box rotateX">3维空间内X轴旋转60度</div>
+        <div class="demo_box rotateY">3维空间内Y轴旋转60度</div>
+        <div class="demo_box rotateZ">3维空间内Z轴旋转60度</div>
+    </div>
+
+    <h3 id="scale">2. 缩放</h3>
+    <div>
+        <div class="demo_box scale_1">宽度缩小80%，高度放大120%</div>
+        <div class="demo_box scale_2">宽高同时缩小一半</div>
+        <div class="demo_box scale_3">先翻转再放大1.2倍</div>
+    </div>
+
+    <h3 id="translate">3. 平移</h3>
+    <div>
+        <div class="demo_box translate_1">鼠标经过向右移动100像素</div>
+        <div class="demo_box translate_2">鼠标经过向相反方向移动100像素</div>
+    </div>
+
+    <h3 id="skew">4.倾斜</h3>
+    <div>
+        <div class="demo_box skew_1">X轴倾斜45度，Y轴倾斜20度</div>
+        <div class="demo_box skew_2">X轴倾斜-45度，Y轴倾斜-20度</div>
+        <div class="demo_box skew_3">鼠标经过X轴倾斜45度，Y轴倾斜45度</div>
+    </div>
+
+    <h3 id="matrix">5. 矩阵变形</h3>
+    <a href="https://www.jqhtml.com/8214.html" target="__blank">矩阵变形</a>
+    <h3 id="scale">6. 透视</h3>
+    <a href="https://www.jqhtml.com/8227.html" target="__blank">透视</a>
+</body>
+
+</html>

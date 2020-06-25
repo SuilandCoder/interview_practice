@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>过渡</title>
+
+    <style>
+        body {
+            counter-reset: action;
+        }
+
+        h3 {
+            margin-left: 30px;
+            /* margin-bottom: 30px; */
+        }
+
+        a {
+            margin-left: 50px;
+        }
+
+        .action {
+            display: block;
+        }
+
+        .action::before {
+            counter-increment: action;
+            content: counter(action) ".";
+        }
+
+        .demo_box {
+            border: 1px solid #3DA5DC;
+            background: #a4dcf9;
+            height: 100px;
+            width: 200px;
+            text-align: center;
+            color: #fff;
+            /* margin-top: 30px; */
+            margin-left: 30px;
+            display: inline-block;
+        }
+
+        .transition_property_1 {
+            -webkit-transition: 0.5s ease;
+            -webkit-transition-property: all;
+        }
+
+        .transition_property_2 {
+            -webkit-transition: 0.5s ease;
+            -webkit-transition-property: none;
+        }
+
+        .transition_property_3 {
+            -webkit-transition: 0.5s ease;
+            -webkit-transition-property: width;
+        }
+
+        .transition_property_1:hover,
+        .transition_property_2:hover,
+        .transition_property_3:hover {
+            width: 300px;
+            height: 300px;
+        }
+
+
+        .transition_duration_1 {
+            -webkit-transition: ease all;
+            -moz-transition: ease all;
+            -webkit-transition-duration: 0;
+            -moz-transition-duration: 0;
+        }
+
+        .transition_duration_2 {
+            -webkit-transition: ease all;
+            -moz-transition: ease all;
+            -webkit-transition-duration: 5s;
+            -moz-transition-duration: 5s;
+        }
+
+        .transition_duration_1:hover,
+        .transition_duration_2:hover {
+            width: 500px;
+            height: 300px;
+        }
+
+
+
+
+        .transition_delay_1 {
+            -webkit-transition: ease all 2s;
+            -moz-transition: ease all 2s;
+            -webkit-transition-delay: 1s;
+            -moz-transition-delay: 1s;
+        }
+
+        .transition_delay_2 {
+            -webkit-transition: ease all 3s;
+            -moz-transition: ease all 3s;
+            -webkit-transition-delay: -1s;
+            -moz-transition-delay: -1s;
+        }
+
+        .transition_delay_1:hover,
+        .transition_delay_2:hover {
+            width: 300px;
+        }
+
+
+
+        .demo_box_4 {
+            border: 1px solid #3DA5DC;
+            background: #a4dcf9;
+            -webkit-transition: all 2s 0.5s;
+            -moz-transition: all 2s 0.5s;
+            display: inline-block;
+            width: 200px;
+            height: 100px;
+            border-radius: 50px;
+            margin: 10px 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .ease {
+            -webkit-transition-timing-function: ease;
+            -moz-transition-timing-function: ease;
+        }
+
+        .linear {
+            -webkit-transition-timing-function: linear;
+            -moz-transition-timing-function: linear;
+        }
+
+        .ease-in {
+            -webkit-transition-timing-function: ease-in;
+            -moz-transition-timing-function: ease-in;
+        }
+
+        .ease-out {
+            -webkit-transition-timing-function: ease-out;
+            -moz-transition-timing-function: ease-out;
+        }
+
+        .ease-in-out {
+            -webkit-transition-timing-function: ease-in-out;
+            -moz-transition-timing-function: ease-in-out;
+        }
+
+        .cubic-bezier {
+            -webkit-transition-timing-function: cubic-bezier(0.52, 0, 0.58, 1.0);
+            -moz-transition-timing-function: cubic-bezier(0.52, 0, 0.58, 1.0);
+        }
+
+        .box_4_room:hover .demo_box_4{
+            height: 300px;
+        }
+
+        .run {
+            left: 500px;
+        }
+
+        .demo {
+            position: relative;
+            height: 300px;
+            margin: 10px auto;
+            background: #99ccff;
+        }
+
+        .demo .inner {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #003366;
+        }
+
+        .demo .one {
+            left: 0;
+            top: 0;
+            -webkit-transition-property: all;
+            -webkit-transition-duration: 2s;
+            -webkit-transition-delay: 0.5s;
+            -webkit-transition-timing-function: ease;
+        }
+
+        .demo .two {
+            left: 110px;
+            top: 0;
+            -webkit-transition-property: left, top, background;
+            -webkit-transition-duration: 1s, 1s, 1s;
+            /* 对应property中的三个属性 */
+            -webkit-transition-delay: 0s, 0s, 2s;
+            -webkit-transition-timing-function: ease, ease-in, linear;
+        }
+
+        .demo:hover .one {
+            left: 200px;
+            top: 200px;
+            background: red;
+        }
+
+        .demo:hover .two {
+            left: 310px;
+            top: 200px;
+            background: red;
+        }
+    </style>
+    <script src="./jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <h3>transition 操作：</h3>
+    <a class="action" href="#property">transition-property[过渡的CSS属性]</a>
+    <a class="action" href="#duration">transition-duration[过渡时间]</a>
+    <a class="action" href="#delay">transition-delay[延迟时间]</a>
+    <a class="action" href="#function">transition-timing-function[过渡效果]</a>
+    <a class="action" href="#advance">高级效果</a>
+
+    <h3 id="property">1. transition-property[过渡的CSS属性]</h3>
+
+    <div class="demo_box transition_property_1">变换所有的属性</div>
+    <div class="demo_box transition_property_2">不变换任何属性</div>
+    <div class="demo_box transition_property_3">只变换宽度属性</div>
+
+
+    <h3 id="duration">2.transition-duration[过渡时间]</h3>
+    <div>
+        <div class="demo_box transition_duration_1">动画没有过渡时间</div>
+        <div class="demo_box transition_duration_2">动画执行5秒</div>
+    </div>
+
+
+
+    <h3 id="delay">3.transition-delay[延迟时间]</h3>
+    <div>
+        <div class="demo_box transition_delay_1">动画延迟一秒执行</div>
+        <div class="demo_box transition_delay_2">动画前1秒被截断</div>
+    </div>
+
+    <h3 id="function">4.transition-timing-function[过渡效果]</h3>
+    <ol style="margin-left: 30px;">
+        <li>ease：缓解效果，等同于cubic-bezier(0.25,0.1,0.25,1.0)函数，既立方贝塞尔。</li>
+        <li>linear：线性效果，等同于cubic-bezier(0.0,0.0,1.0,1.0)函数。</li>
+        <li>ease-in：渐显效果，等同于cubic-bezier(0.42,0,1.0,1.0)函数。</li>
+        <li>ease-out：渐隐效果，等同于cubic-bezier(0,0,0.58,1.0)函数。</li>
+        <li>ease-in-out：渐显渐隐效果，等同于cubic-bezier(0.42,0,0.58,1.0)函数。</li>
+        <li>cubic-bezier：特殊的立方贝塞尔曲线效果。</li>
+    </ol>
+    <div class="box_4_room" style="background-color: teal;display: flex;justify-content: space-between;">
+        <div class="demo_box_4 ease">ease</div>
+        <div class="demo_box_4 linear">linear</div>
+        <div class="demo_box_4 ease-in">ease-in</div>
+        <div class="demo_box_4 ease-out">ease-out</div>
+        <div class="demo_box_4 ease-in-out">ease-in-out</div>
+        <div class="demo_box_4 cubic-bezier">cubic-bezier(0.52,0,0.58,1.0)</div>
+    </div>
+    <h3 id="advance">5. 高级变换</h3>
+    <div class="demo">
+        <div class="inner one">1</div>
+        <div class="inner two">2</div>
+    </div>
+</body>
+</html>
