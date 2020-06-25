@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .theme{
+            width: 100%;
+            height: 50px;
+            position: relative; 
+            background-color: aqua;
+            margin-bottom: 20px;
+        }
+
+        .title_text{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+
+        .box{
+            display:flex;
+            justify-content: space-around;
+        }
+
+        #vert_cent_box1{
+            width: 300px;
+            height: 300px;
+            background-color:cadetblue;
+            position: relative;
+        }
+
+        #vert_cent1{
+            width: 100px;
+            height: 30px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -50px;
+            margin-top: -15px;
+            background-color: burlywood;
+        }
+
+        #vert_cent_box2{
+            width: 300px;
+            height: 300px;
+            background-color:cadetblue;
+            position: relative;
+        }
+
+        #vert_cent2{
+            width: 100px;
+            height: 30px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0; 
+            margin: auto;
+            background-color: burlywood;
+        }
+
+        #vert_cent_box3{
+            width: 300px;
+            height: 300px; 
+            background-color:cadetblue; 
+            position: relative;
+        }
+
+        #vert_cent3{
+            width: 100px;
+            height: 30px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%); 
+            background-color: burlywood;
+        }
+
+        #vert_cent_box4{
+            width: 300px;
+            height: 300px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color:cadetblue;  
+        }
+
+        #vert_cent4{
+            width: 100px;
+            height: 30px;   
+            background-color: burlywood;
+        }
+
+        #vert_cent_box5{
+            width: 300px;
+            height: 300px;
+            position: relative;
+            background-color: cadetblue;
+        }
+        
+        #vert_cent_box6{
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            width: 300px;             
+            height: 300px;
+            background-color: cadetblue; 
+        }
+
+        #vert_cent6{
+            display: inline-block;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="theme"><div class="title_text">1. 垂直居中方案</div></div>
+    <div class="box">
+        <div id="vert_cent_box1">
+            <button id="vert_cent1">我要垂直居中</button>
+            <p><b>要点：</b>绝对定位加 left & top=50%，margin-left & top=子元素宽高的一半实现；</p>
+            <p><b>局限：</b>必须预先知道子元素大小</p>
+        </div>
+        
+        <div id="vert_cent_box2">
+            <button id="vert_cent2">我要垂直居中</button>
+            <p><b>要点：</b>绝对定位加 left & top & right & bottom=0；margin=auto；</p>
+            <p><b>局限：</b>必须预先知道子元素大小</p>
+        </div>
+
+        <div id="vert_cent_box3">
+            <button id="vert_cent3">我要垂直居中</button>
+            <p><b>要点：</b>不需要考虑宽高 <br> 绝对定位加 left & top=50%；transform: translate(-50%,-50%)；</p>
+            <p><b>局限：</b>需要考虑兼容性问题：IE9+、Safari 3.1+、 Chrome 8+、Firefox 4+、Opera 10+</p>
+        </div>
+
+        <div id="vert_cent_box4">
+            <button id="vert_cent4">我要垂直居中</button>
+            <div style="position: absolute; width:280px">
+                <p><b>要点：</b>不需要考虑宽高 <br> 外层box flex布局，justify-content: center; align-items: center;</p>
+                <p><b>局限：</b>需要考虑兼容性问题：IE10+、Android:4.4、IOS：7.1</p>
+            </div>
+        </div>
+
+        <div id="vert_cent_box5">
+            <button id="vert_cent5">我要垂直居中</button>
+            <div>
+                <p><b>要点：</b>不需要考虑宽高 <br> js获取box及自身宽高，设置position、left、top;</p>
+                <p><b>局限：</b>代码量大</p>
+            </div>
+        </div>
+
+        <div>
+            <div id="vert_cent_box6">
+                <button id="vert_cent6">我是文本，我要垂直居中</button>
+                <div style="position: absolute; width:280px">
+                    <p><b>要点：</b>父级box：display=table-cell;vertical-align=middle;text-align=center <br> 子元素必须行级元素：display=inline-block;</p>
+                    <p><b>局限：</b>父元素必须有固定宽高</p>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <script>
+        let boxw = vert_cent_box5.offsetWidth,
+            boxh = vert_cent_box5.offsetHeight,
+            childw = vert_cent5.offsetWidth,
+            childh = vert_cent5.offsetHeight;
+            vert_cent5.style.position = 'absolute';
+            vert_cent5.style.left = (boxw-childw)/2+"px";
+            vert_cent5.style.top = (boxh-childh)/2+"px";
+    </script>
+    
+</body>
+</html>
