@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>盒模型</title>
+
+    <style>
+        .box{
+            display: flex;
+            align-items: center;
+        } 
+        p{
+            margin: 0;
+            padding: 0;
+        }
+        .theme{
+            width: 100%;
+            height: 80px;
+            position: relative; 
+            background-color: aqua;
+            margin-bottom: 20px;
+        }
+
+        .title_text{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 26px;
+            text-align: center;
+        }
+
+        #content-box{
+            width: 250px;
+			height: 200px;
+			padding: 10px;
+			margin: 20px;
+			border: 5px solid #E19DEC;
+			background: #CCCCCC;
+			box-sizing: content-box;
+        }
+
+        #content-box2{
+            width:250px;
+            height: 200px;
+			padding: 10px;
+			margin: 20px;
+			border: 5px solid #E19DEC;
+			background: #CCCCCC;
+			box-sizing:border-box;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="theme"><div class="title_text"><span>1. 标准盒模型 content-box </span><br> <span style="color: red;">缺点：修改border或padding后，元素大小会改变。</span></div></div>
+    <div class="box">
+        <div id="content-box">
+            <p>width: 250px;</p>
+            <p>height: 200px;</p>
+            <p>padding: 10px;</p>
+            <p>margin: 20px;</p>
+            <p>border: 5px;</p>
+            <p>box-sizing: content-box;</p>
+            <p style="font-size: 12px;margin-top: 10px;"><b>实际宽度=content+padding+border</b><br>250+10*2+5*2 = 280px</p>
+        </div>
+        <img src="../assets/img/content-box.png" alt="">
+    </div>
+
+    <div class="theme"><div class="title_text">2. 怪异盒模型 border-box</div></div>
+    <div class="box">
+        <div id="content-box2">
+            <p>width: 250px;</p>
+            <p>height: 200px;</p>
+            <p>padding: 10px;</p>
+            <p>margin: 20px;</p>
+            <p>border: 5px;</p>
+            <p>box-sizing: border-box;</p>
+            <p style="font-size: 12px;margin-top: 10px;"><b>实际宽度=content</b><br>250px</p>
+        </div>
+        <img src="../assets/img/border-box.png" alt="">
+    </div>
+</body>
+</html>
