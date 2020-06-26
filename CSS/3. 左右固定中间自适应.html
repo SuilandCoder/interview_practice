@@ -7,14 +7,16 @@
     <title>左右固定中间自适应</title>
 
     <style>
-        p{
+        p {
             margin: 0;
             padding: 0;
         }
-        div{
+
+        div {
             box-sizing: border-box;
             padding-left: 20px;
         }
+
         .title {
             width: 100%;
             height: 80px;
@@ -32,72 +34,122 @@
             text-align: center;
         }
 
-        .container1{
+        .container1,
+        .container2 {
             /* width: 100%; */
             height: 300px;
             padding: 0 200px;
         }
 
-        .center{
+        .container2 {
+            width: 100%;
+        }
+
+        .center1,
+        .center2 {
             width: 100%;
             height: 200px;
             background-color: chocolate;
         }
 
-        .left,
-        .right {
+        .left1,
+        .right1,
+        .left2,
+        .right2 {
             width: 200px;
             height: 150px;
             background-color: cadetblue;
         }
 
-        .left,
-        .right,
-        .center{
+        .left1,
+        .right1,
+        .center1,
+        .left2,
+        .right2,
+        .container2 {
             float: left;
         }
 
-        .left{
+        .left1 {
             position: relative;
             margin-left: -100%;
             left: -200px;
         }
-        .right{
+
+        .right1 {
             margin-right: -200px;
         }
+
+        .left2 {             
+            margin-left: -100%;         
+        }
+
+        .right2 {
+            margin-left: -200px;
+        }
+
+
     </style>
 </head>
 
 <body>
     <div class="title">
         <div class="title_text">
-            <span>1. 圣杯 </span><br>
-            <span style="color: red;">要点：</span>
+            <span>1. 圣杯 </span><br> 
         </div>
     </div>
 
-    <div class="container1 clearfix">
-        <div class="center">
+    <div class="container1">
+        <div class="center1">
+            外层 container:
+            <p>padding: 0 200px;</p>
+            内部 center:
             <p> width: 100%;</p>
-            <p> height: 100px;</p>
-
+            <p> height: 150px;</p>
             <p style="color: cyan;">float: left;</p>
         </div>
-        <div class="left">
-            <p> width: 200px;</p>             
-            <p> height: 100px;</p>
-
+        <div class="left1">
+            <p> width: 200px;</p>
+            <p> height: 150px;</p>
             <p style="color:darkred">margin-left: -100%;</p>
             <p style="color:darkred">position: relative; </p>
             <p style="color: darkred;">left: -200px;</p>
             <p style="color: cyan;">float: left;</p>
         </div>
-        <div class="right">
-            <p> width: 200px;</p>             
-            <p> height: 100px;</p>
+        <div class="right1">
+            <p> width: 200px;</p>
+            <p> height: 150px;</p>
             <p style="color:darkred">margin-right: -200px;</p>
             <p style="color: cyan;">float: left;</p>
         </div>
+    </div>
+
+    <div class="title">
+        <div class="title_text">
+            <span>2. 双飞翼 </span><br> 
+        </div>
+    </div>
+
+    <div class="container2">
+        <div class="center2"> 
+            外层 container:
+            <p>width:100%</p>
+            <p>padding: 0 200px;</p>
+            <p style="color: cyan;">float: left;</p>
+
+        </div>
+    </div>
+    <div class="left2">
+        <p> width: 200px;</p>         
+        <p> height: 150px;</p>
+        <p style="color:darkred">margin-left: -100%;</p>                      
+        <p style="color: cyan;">float: left;</p>
+    </div>
+    <div class="right2">
+        <p> width: 200px;</p>
+        <p> height: 150px;</p>             
+        <p style="color:darkred">margin-left: -200px;</p>             
+        <p style="color: cyan;">float: left;</p>
     </div>
 
 
