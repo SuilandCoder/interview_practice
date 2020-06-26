@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>左右固定中间自适应</title>
+
+    <style>
+        p{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            box-sizing: border-box;
+            padding-left: 20px;
+        }
+        .title {
+            width: 100%;
+            height: 80px;
+            position: relative;
+            background-color: aqua;
+            margin-bottom: 20px;
+        }
+
+        .title_text {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 26px;
+            text-align: center;
+        }
+
+        .container1{
+            /* width: 100%; */
+            height: 300px;
+            padding: 0 200px;
+        }
+
+        .center{
+            width: 100%;
+            height: 200px;
+            background-color: chocolate;
+        }
+
+        .left,
+        .right {
+            width: 200px;
+            height: 150px;
+            background-color: cadetblue;
+        }
+
+        .left,
+        .right,
+        .center{
+            float: left;
+        }
+
+        .left{
+            position: relative;
+            margin-left: -100%;
+            left: -200px;
+        }
+        .right{
+            margin-right: -200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        <div class="title_text">
+            <span>1. 圣杯 </span><br>
+            <span style="color: red;">要点：</span>
+        </div>
+    </div>
+
+    <div class="container1 clearfix">
+        <div class="center">
+            <p> width: 100%;</p>
+            <p> height: 100px;</p>
+
+            <p style="color: cyan;">float: left;</p>
+        </div>
+        <div class="left">
+            <p> width: 200px;</p>             
+            <p> height: 100px;</p>
+
+            <p style="color:darkred">margin-left: -100%;</p>
+            <p style="color:darkred">position: relative; </p>
+            <p style="color: darkred;">left: -200px;</p>
+            <p style="color: cyan;">float: left;</p>
+        </div>
+        <div class="right">
+            <p> width: 200px;</p>             
+            <p> height: 100px;</p>
+            <p style="color:darkred">margin-right: -200px;</p>
+            <p style="color: cyan;">float: left;</p>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
