@@ -23,6 +23,7 @@
             position: relative;
             background-color: aqua;
             margin-bottom: 20px;
+            clear: both;
         }
 
         .title_text {
@@ -88,6 +89,24 @@
             margin-left: -200px;
         }
 
+        .container3{
+            height: 300px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .left3,
+        .right3 {
+            flex: 0 0 200px;
+            background-color: cadetblue;
+            height: 200px;
+        }
+
+        .center3{
+            flex:1;
+            background-color: chocolate;
+        }
+
 
     </style>
 </head>
@@ -130,29 +149,57 @@
         </div>
     </div>
 
-    <div class="container2">
-        <div class="center2"> 
-            外层 container:
-            <p>width:100%</p>
-            <p>padding: 0 200px;</p>
+    <div>
+        <div class="container2">
+            <div class="center2"> 
+                外层 container:
+                <p>width:100%</p>
+                <p>padding: 0 200px;</p>
+                <p style="color: cyan;">float: left;</p>
+    
+            </div>
+        </div>
+        <div class="left2">
+            <p> width: 200px;</p>         
+            <p> height: 150px;</p>
+            <p style="color:darkred">margin-left: -100%;</p>                      
             <p style="color: cyan;">float: left;</p>
-
+        </div>
+        <div class="right2">
+            <p> width: 200px;</p>
+            <p> height: 150px;</p>             
+            <p style="color:darkred">margin-left: -200px;</p>             
+            <p style="color: cyan;">float: left;</p>
         </div>
     </div>
-    <div class="left2">
-        <p> width: 200px;</p>         
-        <p> height: 150px;</p>
-        <p style="color:darkred">margin-left: -100%;</p>                      
-        <p style="color: cyan;">float: left;</p>
-    </div>
-    <div class="right2">
-        <p> width: 200px;</p>
-        <p> height: 150px;</p>             
-        <p style="color:darkred">margin-left: -200px;</p>             
-        <p style="color: cyan;">float: left;</p>
-    </div>
 
 
+    <div class="title">
+        <div class="title_text">
+            <span>3. flex </span><br> 
+        </div>
+    </div>
+
+    <div class="container3">
+        <div class="left3">
+            <p>flex: 0 0 200px;</p>            
+            <p> background-color: cadetblue; </p>            
+            <p>height: 200px;</p>
+        </div>
+        <div class="center3">
+            外层 container:                 
+            <p>display: flex;</p>                 
+            <p>justify-content: space-between;</p>
+            内部 center:
+            <p>flex:1;</p>
+        </div> 
+        <div class="right3">
+            <p>flex: 0 0 200px;</p>                         
+            <p> background-color: cadetblue; </p>                         
+            <p>height: 200px;</p>
+        </div> 
+    </div>
+    
 
 </body>
 
