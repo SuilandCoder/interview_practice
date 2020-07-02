@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双向数据绑定</title>
+</head>
+<body>
+    <div>1. defineProperty</div>
+    姓名1：<span id="spanName_d"></span><br>
+    <input type="text" id="inpName_d">
+
+    <div>2. Proxy</div>
+    姓名2：<span id="spanName_p"></span><br>
+    <input type="text" id="inpName_p">
+    <script>
+        let obj = {
+            name:""
+        };
+        let tmpObj = JSON.parse(JSON.stringify(obj));
+        Object.defineProperty(obj,'name',{
+            get(){
+                return tmpObj.name;
+            },
+            set(val){
+                tmpObj.name=val;
+                observer();
+            }
+        })
+        function observer(){
+            spanName_d.innerHTML = obj.name;
+            inpName_d.value = obj.name;
+        }
+
+        observer();
+
+        setTimeout(_=>{
+            obj.name = "宋杰"
+        },1000)
+
+        inpName_d.oninput=function(ev){
+            obj.name = ev.target.value;
+        }
+    </script>
+    
+    <script>
+        let obj1 = {
+            name:""
+        }
+        obj1 = new Proxy(obj1,{
+            get(target,prop){
+                return target[prop]
+            },
+            set(target,prop,value){
+                target[prop] = value;
+                observer1();
+            }
+        })
+        function observer1(){
+            spanName_p.innerHTML = obj1.name;
+            inpName_p.value = obj1.name;
+        }
+        observer1();
+        setTimeout(() => {
+            obj1.name = "张如梦";
+        }, 1500);
+
+        inpName_p.oninput = function(ev){
+            obj1.name = ev.target.value;
+        }
+
+    </script>
+
+</body>
+</html>
