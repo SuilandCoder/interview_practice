@@ -49,11 +49,13 @@
         }
         obj1 = new Proxy(obj1,{
             get(target,prop){
-                return target[prop]
+                return target[prop];
+                // return Reflect(target,prop);
             },
             set(target,prop,value){
                 target[prop] = value;
                 observer1();
+                // return Reflect.set(target,prop,value);
             }
         })
         function observer1(){

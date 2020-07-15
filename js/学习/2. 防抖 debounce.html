@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖</title>
+</head>
+<body>
+    <div style="height: 2000px;"></div>
+</body>
+
+<script>
+    function debounce(fn,wait){
+        let timer = null;
+        return function(){
+            if(timer!==null){
+                clearTimeout(timer);
+            }
+            timer = setTimeout(fn, wait);
+        }
+    }
+
+    function handler(){     
+        console.log(Math.random()); 
+    }  
+
+    window.addEventListener('scroll',debounce(handler,1000));
+
+</script>
+</html>

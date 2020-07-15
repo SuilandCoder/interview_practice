@@ -16,18 +16,15 @@
     </script>
 
     <script>
-        // console.log(name);  // undefined
-        console.log(name+"1");
-        // foo();
+        setTimeout(() => {
+            Promise.resolve(1).then(console.log);
+        }, 0);
 
-        // function foo() {
-        //     // var name = "songjie";
-        //     console.log(name);
-        // }
-       
-        var name = "songjie";
-        // console.log(name);
-        // var name = "sdf";
+        setTimeout(() => {
+            console.log(2);
+        }, 0);
+
+        console.log(3);
     </script>
 </body>
 

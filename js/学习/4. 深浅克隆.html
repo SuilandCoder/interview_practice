@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        let obj={     
+            a:100,     
+            b:[10,20,30],     
+            c:{         
+                x:10     
+            },     
+            d:/^\d+$/ 
+        }
+
+        let obj2 = {...obj};
+
+        console.log(obj);
+        console.log(obj2);
+        // JSON 转换的形式实现深克隆问题：函数、日期、正则类型无法拷贝
+        let obj_str = JSON.stringify(obj);
+        let obj3 = JSON.parse(obj_str);
+        console.log(obj3);
+
+        function deepClone (obj){
+            if(obj === null) return null;
+            if(typeof obj!=='object') return obj;
+            if(obj instanceof RegExp){
+                return new RegExp(obj);
+            }
+            if(obj instanceof Date){
+                return new Date(obj);
+            }
+            if(obj instanceof Function){
+                return new Function(obj);
+            }
+            let newObj = new obj.constructor;
+            for(let key in obj){
+                if(obj.hasOwnProperty(key)){
+                    newObj[key] = deepClone(obj[key]);
+                }
+            }
+
+            return newObj;
+        }
+
+    </script>
+</body>
+</html>

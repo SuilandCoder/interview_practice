@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节流</title>
+</head>
+
+<body>
+    <div style="height: 2000px;"></div>
+</body>
+<script>
+let throttle=function(fn,waite){
+    let pre = Date.now();
+    return function(){
+        let context = this;
+        // let args = arguments;
+        let args = [].slice.call(arguments);
+        let now = Date.now();
+        if((now-pre)>=waite){
+            fn.apply(context,args);
+            // fn(arguments);
+            pre = Date.now();
+        }
+    }
+}
+
+let throttle_timer=function(fn,waite){
+    let timer = null;
+    return function(){
+        let context = this;
+        let args = [].slice.call(arguments);
+        if(!timer){
+            timer = setTimeout(_=>{
+                fn.apply(context,args);
+                timer = null;
+            },waite)
+        }
+    }
+}
+function handler(a,b,c){
+    console.log(Math.random());
+}
+// window.addEventListener('scroll',throttle(handler,1000));
+window.addEventListener('scroll',throttle_timer(handler,1000));
+// window.addEventListener('scroll',handler);
+</script>
+
+</html>
