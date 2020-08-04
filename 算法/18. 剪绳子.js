@@ -14,6 +14,7 @@
 //* 第二部分存在剪和不剪两种情况，剪的时候值为dp[i-k]，不剪的时候取（i-k)
 //* dp[i] = max{ k * dp[i-k], k * (i-k)} (2<=k<=i)
 
+//* 2<n<58
 function cutStrings(n){
     const dp = new Array(n+1).fill(1);
     for(let i=3;i<=n;i++){
@@ -24,4 +25,24 @@ function cutStrings(n){
     return dp[n];
 }
 
-console.log(cutStrings(10))
+// console.log(cutStrings(10))
+
+
+
+/**
+ * @param {number}  2<n<1000
+ * @return {number}
+ */
+var cuttingRope = function() {
+    let result = [0,1,1,2,4,6,9];
+    return function(n){
+        if(typeof result[n]==='number'){
+            return result[n];
+        }else{
+            result[n] = (cuttingRope(n-3)*3)%(1e9+7);
+            return result[n]%(1e9+7);
+        }
+    }
+}()
+
+console.log(cuttingRope(30))
