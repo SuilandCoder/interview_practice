@@ -11,16 +11,10 @@ function createIterator(items){
 }
 
 let iterator = createIterator([3,4,5]);
-console.log(iterator.next());
-console.log(iterator.next());
-console.log(iterator.next());
-console.log(iterator.next());
-
-
-
-
-
-
+// console.log(iterator.next());
+// console.log(iterator.next());
+// console.log(iterator.next());
+// console.log(iterator.next());
 
 
 function *createIterator(items){
@@ -30,4 +24,29 @@ function *createIterator(items){
 }
 
 let iterator2 = createIterator([1,2,3]);
-console.log(iterator2.next().value);
+// console.log(iterator2.next().value);
+
+//* 简单任务执行器：
+function run(taskDef){
+    //* 创建一个无使用限制的迭代器
+    let task = taskDef();
+
+    //* 开始执行任务
+    let result = task.next();
+
+    function step(){
+        if(!result.done){
+            result = task.next();
+            step();
+        }       
+    }
+    step();
+}
+
+run(function*(){
+    console.log(1);
+    yield;
+    console.log(2);
+    yield;
+    console.log(3);
+})
