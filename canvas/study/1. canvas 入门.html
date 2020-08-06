@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="margin:0px;">
+    <canvas id="myCanvas" width="200" height="100" style="border:1px solid #c3c3c3;" onmousemove="cnvs_getCoordinates(event)" onmouseout="cnvs_clearCoordinates()"></canvas>
+    <canvas id="myCanvasLine" width="200" height="100" style="border:1px solid #c3c3c3;"></canvas>
+
+    <div id="xycoordinates"></div>
+    <script type="text/javascript">
+        var c = document.getElementById('myCanvas');
+        var cxt = c.getContext('2d');
+        cxt.fillStyle = '#000000';
+        // cxt.fillRect(0,0,180,75);
+        cxt.beginPath();
+        cxt.arc(80,40,5,Math.PI*2,0,false);
+        cxt.closePath();
+        cxt.fill();
+        cxt.fillStyle = '#ff0000';
+        cxt.beginPath();
+        cxt.arc(50,40,30,3.14,0,false);
+        cxt.closePath();
+        cxt.fill();
+        // cxt.moveTo(80,40);
+        
+
+        var cline = document.getElementById('myCanvasLine');
+        var cxtline = cline.getContext('2d');
+        cxtline.moveTo(10,10);
+        cxtline.lineTo(150,50);
+        cxtline.lineTo(10,50);
+        cxtline.stroke();
+
+        function cnvs_getCoordinates(e){
+            x = e.clientX;
+            y = e.clientY;
+            document.getElementById('xycoordinates').innerHTML = `Coordinates:(${x},${y})`;
+        }
+
+        function cnvs_clearCoordinates(){
+            document.getElementById('xycoordinates').innerHTML = "";
+        }
+
+
+
+    </script>
+</body>
+</html>
