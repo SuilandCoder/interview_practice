@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>粒子时钟</title>
+</head>
+
+<body>
+    <div id="test">
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button>10</button>
+    </div>
+    <canvas id="canvas">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+
+    <script src="js/digit.js"></script>
+    <script>
+        var canvas = document.getElementById('canvas')
+        if (canvas.getContext) {
+            let cxt = canvas.getContext('2d');
+            function renderDigit(num) {
+                //重置画布宽度，达到清空画布的效果
+                canvas.height = 100;
+                var R = canvas.height / 20;
+                for (var i = 0; i < digit[num].length; i++) {
+                    for (var j = 0; j < digit[num][i].length; j++) {
+                        if (digit[num][i][j] == 1) {
+                            cxt.beginPath();
+                            cxt.arc(j * 2 * R + R, i * 2 * R  + R , R-1, 0, 2 * Math.PI);
+                            cxt.closePath();
+                            cxt.fill();
+                        }
+                    }
+                }
+            }
+        }
+        var test = document.getElementById('test');
+        test.onclick = function(e){
+            e = e || event; // 考虑到浏览器兼容问题，有的浏览器会将事件对象绑定在全局windows上
+            var target = e.target || e.srcElement;
+            if(!isNaN(target.innerHTML)){
+                renderDigit(target.innerHTML);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
