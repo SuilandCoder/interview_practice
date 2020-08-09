@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        var name = 'global';
+        var obj = function(){
+            this.name= 'local';
+            this.foo=function () {
+                this.name = 'foo';
+            }.bind(window);
+        };
+        // obj.foo.bind(window);
+        var bar = new obj();
+        bar.foo();
+        
+        setTimeout(function () {
+            console.log(window.name);
+        }, 0);
+        console.log(bar.name);
+
+        var bar3 = bar2 = bar;
+        bar2.name = 'foo2';
+        console.log(bar3.name);
+ 
+        // let w = function (){
+        //     this.name = "asdfadf"
+        // }
+        // w.bind(window);
+        // w();
+
+    </script>
+</body>
+
+</html>
