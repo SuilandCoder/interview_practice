@@ -1,4 +1,5 @@
 let fs = require('fs');
+const { resolve } = require('path');
 
 function readFile(fileName){
     return new Promise((resolve,reject)=>{
@@ -31,16 +32,16 @@ p1.then(value=>{
     return value+1;
 }).then(value=>{
     console.log(value);
-}).catch(err=>{  // 直接 .catch 处理，不会被unhandledRefection 捕获到    
+}).catch(err=>{  // * 直接 .catch 处理，不会被unhandledRefection 捕获到    
     console.log(err+"sdafadsf") 
-    return err;
+    return err; // * 拒绝处理程序的返回值，仍可用在下一个Promise的完成处理程序中
 }).then(value=>{
-    console.log(value+1);
+    console.log(value+2);
 })
 
-p1.catch(err=>{  
-    console.log(err+"sdafadsf") 
-})
+// p1.catch(err=>{  
+//     console.log(err+"sdafadsf") 
+// })
 
 let p2 = new Promise((resolve,reject)=>{
     resolve(10);
@@ -58,4 +59,26 @@ p2.then(value=>{
     return p3;
 }).then(value=>{ //* p3 执行完毕后，才会执行这个then方法；
     console.log(value);
+})
+
+console.log("####################### Promise All ############################")
+
+let p11 = new Promise((resolve,reject)=>{
+    resolve(1);
+})
+
+let p12 = new Promise((resolve,reject)=>{
+    reject(2);
+})
+
+let p13 = new Promise((resolve,reject)=>{
+    resolve(3);
+})
+
+let p4 = Promise.all([p11,p12,p13]);
+p4.then(values=>{
+    console.log(Array.isArray(values));
+    console.log(values[0]);
+    console.log(values[1]);
+    console.log(values[2]);
 })

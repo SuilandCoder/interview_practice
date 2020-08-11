@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>粒子时钟</title>
+</head>
+
+<body>
+    <canvas id="canvas" style="width:400px;">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+
+    <script src="js/digit.js"></script>
+    <script>
+        var canvas = document.getElementById('canvas')
+        if (canvas.getContext) {
+            let cxt = canvas.getContext('2d');
+            canvas.height =100;
+            canvas.width = 700;
+
+            function renderDigit(index,num){
+                var R = canvas.height/20;
+                for(let i=0;i<digit[num].length;i++){
+                    for(let j=0;j<digit[num][i].length;j++){
+                        if(digit[num][i][j]==1){
+                            cxt.beginPath();
+                            cxt.arc(14*(R+1)*index + j*2*R+R,i*2*R,R-1,0,2*Math.PI);
+                            cxt.closePath();
+                            cxt.fill();
+                        }
+                    }
+                }
+            }
+
+            function digitTime(){
+                /*获取时间数据*/
+                let temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+                //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+                var data = [];
+                data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6])
+                /*渲染时钟*/
+                canvas.height = 100;//* 重置画布宽度，达到清空画布的效果
+                for(var i=0;i<data.length;i++){
+                    renderDigit(i,data[i]);
+                }
+            }
+
+        }
+
+        digitTime();
+        // clearInterval(oTimer);
+        // var oTimer = setInterval(() => {
+        //     digitTime();
+        // }, 1000);
+        // cancelAnimationFrame(timer);
+        let timer = requestAnimationFrame(function fn(){
+            digitTime();
+            timer = requestAnimationFrame(fn);
+        });
+    </script>
+
+</body>
+
+</html>
