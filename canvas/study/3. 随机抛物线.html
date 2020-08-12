@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>粒子时钟</title>
+</head>
+
+<body>
+    <button id="btn">button</button>
+    <canvas id="canvas" style="border:1px solid black">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+
+    <script src="js/digit.js"></script>
+    <script>
+        var canvas = document.getElementById('canvas')
+        if (canvas.getContext) {
+            var cxt = canvas.getContext('2d');
+            var H = 100, W = 200;
+            canvas.height = H;
+            canvas.width = W;
+            var R = canvas.height / 20 - 1;
+            var numArray = [-1,-2,0,1, 2];
+            var colorArray = ["#3BE", "#09C", "#A6C", "#93C", "#9C0", "#690", "#FB3", "#F80", "#F44", "#C00"];
+            btn.onclick = function () {
+                // console.log("click");
+                //声明x、y轴坐标
+                var x = Math.floor(Math.random() * 60 + 10);
+                var y = Math.floor(Math.random() * 60 + 10);
+                // var y = 70;
+
+                //声明x,y轴的步长
+                // var stepY = -1 * numArray[Math.floor(Math.random() * numArray.length)];
+                var stepY = 0;
+                // var stepX = 3;
+                var stepX = Math.floor(Math.random() * 10 - 5);
+                //声明y轴变化值
+                var disY = 0;
+                var disY = numArray[Math.floor(Math.random() * numArray.length)];
+                var color = colorArray[Math.floor(Math.random() * colorArray.length)];
+                // clearInterval(oTimer);
+                var oTimer = requestAnimationFrame(function fn() {
+                    stepY += disY;
+                    x += stepX;
+                    y += stepY;
+                    canvas.height = 100;
+                    cxt.beginPath();
+                    cxt.arc(x, y, R, 0, 2 * Math.PI);
+                    cxt.fillStyle = color;
+                    cxt.closePath();
+                    cxt.fill();
+                    if (x > W + R || y > H + R) {
+                        cancelAnimationFrame(oTimer);
+                    } else {
+                        requestAnimationFrame(fn);
+                    }
+                    console.log("asdf");
+                })
+
+            }
+        }
+    </script>
+
+</body>
+
+</html>
