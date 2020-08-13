@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas 元素</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="600" height="300"> Canvas not supported</canvas>
+
+    <script>
+        var canvas = document.getElementById('canvas'),
+            context = canvas.getContext('2d');
+        context.font = '38pt Arial';  // pt 绝对大小：1/72英寸
+        context.fillStyle = 'cornflowerblue';
+        context.strokeStyle = 'blue';
+        context.fillText('Hello Canvas',0,150);
+        context.strokeText('Hello Canvas',canvas.width/2-150,canvas.height/2+15);
+    </script>
+</body>
+
+</html>
