@@ -8,45 +8,91 @@
 </head>
 
 <body>
-    <canvas id="cavas" style="width: 1000px;height:800px;"></canvas>
-
+    <canvas id="canvas"></canvas>
+    <button id="stopBtn">别转了</button>
+    <button id="startBtn">动起来</button>
     <script>
+        const rate = 30;
+        const ROTATE_SPEED = 365 / rate;
+        const REVOLUTION_SPEED = 1 / rate;
+        var day = 0;
+        var time = 1;
+        var timer;
+        var earthImg = new Image();
+        earthImg.src = '../assets/img/地球.svg';
         window.onload = function () {
             var canvas = document.getElementById('canvas');
-            var cxt = canvas.getContext('2d');
-            drawNotChange(cxt);
-            cxt.fillStyle = 'blue';
-            cxt.beginPath();
-            cxt.arc(500, 550, 30, 0, 2 * Math.PI, true);
-            cxt.closePath();
-            cxt.fill();
-            setInterval(function () {
-                run(cxt);
-            }, 50);
+            canvas.height = 728;
+            canvas.width = 1024;
+            // var time=0;
+            if (canvas.getContext) {
+                var cxt = canvas.getContext('2d');
+                drawNotChange(cxt);
+                cxt.fillStyle = 'blue';
+                cxt.lineWidth = 1;
+                cxt.beginPath();
+                cxt.moveTo(500, 400);
+                cxt.lineTo(500, 550);
+                cxt.stroke()
+                cxt.closePath();
+                cxt.drawImage(earthImg, 470, 520, 60, 60);
 
+                // timer = requestAnimationFrame(function fn() {
+                //     run(cxt);
+                //     timer = requestAnimationFrame(fn);
+                // })
+                // start();
+
+                document.getElementById('startBtn').onclick =start;
+
+                var stopBtn = document.getElementById('stopBtn');
+                stopBtn.onclick = stop;
+
+                function start() {
+                    timer = requestAnimationFrame(function fn() {
+                        run(cxt);
+                        time++;
+                        timer = requestAnimationFrame(fn);
+                        if(time%30===0){                     
+                            stop();                
+                        }
+                    })
+                }
+
+                function stop() {
+                    cancelAnimationFrame(timer);
+                }
+
+            }
         }
-
-        var time = 0;
 
         function run(cxt) {
             cxt.clearRect(0, 0, 1024, 728);
             drawNotChange(cxt);
             cxt.save();//将当前以左上角坐标为(0,0)的上下文环境进行保存，这样是为了在接下来中要进行画布偏移后，可以进行还原当前的环境
             cxt.translate(500, 400);
-            cxt.rotate(time * 8 * Math.PI / 180);//设定每次旋转的度数
+            // let time = new Date();
+            // cxt.rotate(-2 * Math.PI / 60 * time.getSeconds() - 2 * Math.PI / 60000 * time.getMilliseconds());//设定每次旋转的度数
+            cxt.rotate(-time * REVOLUTION_SPEED * Math.PI / 180);
             cxt.fillStyle = 'blue';
+
             cxt.beginPath();
-            cxt.arc(0, 150, 30, 0, 2 * Math.PI, false);
+            cxt.moveTo(0, 0);
+            cxt.lineTo(0, 150);
+            cxt.stroke()
             cxt.closePath();
-            cxt.fill();
-            cxt.restore();//将当前为(500,400)的点还原为（0,0）,其实在save中就是将上下文环境保存到栈中，在restore下面对其进行还原
-            time += 1;
+
+            cxt.translate(0, 150);
+            // cxt.rotate(-2 * Math.PI / 6 * time.getSeconds() - 2 * Math.PI / 6000 * time.getMilliseconds());
+            cxt.rotate(-time * ROTATE_SPEED * Math.PI / 180);
+            cxt.drawImage(earthImg, -30, -30, 60, 60);
+            cxt.restore();
         }
 
         function drawNotChange(cxt) {
             cxt.fillStyle = 'red';
             cxt.beginPath();
-            cxt.arc(500, 40, 30, 0, 2 * Math.PI, true);
+            cxt.arc(500, 400, 30, 0, 2 * Math.PI, true);
             cxt.closePath();
             cxt.fill();
             cxt.beginPath();
@@ -54,6 +100,7 @@
             cxt.closePath();
             cxt.stroke();
         }
+
     </script>
 </body>
 
