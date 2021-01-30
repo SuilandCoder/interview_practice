@@ -1,0 +1,287 @@
+<!DOCTYPE html><html><head>
+    <title>news</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+
+    <link rel="stylesheet" href="./css/info.css">
+    <style>
+        #popup{
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            display: none;
+            z-index: 9999999;
+        }
+        #popup .bg{
+            display: flex;     justify-content: center;     align-items: center;
+            background-color: rgba(0,0,0,0.5);
+            width: 100%;
+            height: 100%;
+        }
+        @media \0screen\,screen\9 {
+            #popup .bg{
+                background-color:#000000;
+                filter:Alpha(opacity=50);
+                position:static;
+            }
+            #popup .bg img{
+                position: relative;
+            }
+        }
+        #popup img{
+            margin-top: 2%;
+            max-height: 90%;
+        }
+    </style>
+
+</head>
+<body style="font-family: 'Times New Roman',serif">
+
+<div style="padding-top: 30px">
+    <p id="title">[ Science ] Call for transparency of COVID-19 models</p>
+</div>
+
+<div id="row">
+    <p id="time">2020/05/01</p>
+</div>
+<div style="width: 60%; margin: auto;border: 2px solid #aaaaaa;background-color: #F5FDFF;">
+    <p id="event" style="padding-left: 30px;padding-right: 30px;padding-top: 30px">OpenGMS has joined with many other modeling science teams around the world to publish an open letter in Science, calling on our colleagues to please share your expertise, insights, and model code on open, FAIR aligned repositories.</p>
+    <p id="result" style="padding-left: 30px;padding-right: 30px;padding-bottom: 10px">Thirty scientists have written an open letter to Science advocating for increased transparency in the modelling behind COVID-19.Among these, Prof. Min Chen has signed on behalf of we OpenGMS team.
+Read the full article here: https://science.sciencemag.org/content/368/6490/482.2</p>
+
+    <!---->
+    <!--<div class="row" style="text-align: center;display: table" >-->
+    <!--<img id="img" />-->
+    <!--<img id="img_1"/>-->
+    <!--<img id="img_2"/>-->
+    <!--<img id="img_3"/>-->
+    <!--</div>-->
+
+    <div class="one" id="div_one">
+        <ul id="img_container" style="left: -368px;">
+
+        <li><a><img src="images/upload/1588489870309.png"></a></li><li><a><img src="images/upload/1588489870312.png"></a></li><li><a><img src="images/upload/1588489870309.png"></a></li><li><a><img src="images/upload/1588489870312.png"></a></li></ul>
+    </div>
+    <div id="popup">   <div class="bg">     <img src="">   </div> </div>
+
+    <p id="introduction" style="padding-left: 30px;padding-right: 30px;padding-top: 10px;padding-bottom: 30px">A hallmark of science is the open exchange of knowledge. At this time of crisis, it is more important than ever for scientists around the world to openly share their knowledge, expertise, tools, and technology. Scientific models are critical tools for anticipating, predicting, and responding to complex biological, social, and environmental crises, including pandemics. They are essential for guiding regional and national governments in designing health, social, and economic policies to manage the spread of disease and lessen its impacts. However, presenting modeling results alone is not enough. Scientists must also openly share their model code so that the results can be replicated and evaluated.
+Given the necessity for rapid response to the coronavirus pandemic, we need many eyes to review and collectively vet model assumptions, parameterizations, and algorithms to ensure the most accurate modeling possible. Transparency engenders public trust and is the best defense against misunderstanding, misuse, and deliberate misinformation about models and their results. We need to engage as many experts as possible for improving the ability of models to represent epidemiological, social, and economic dynamics so that we can best respond to the crisis and plan effectively to mitigate its wider impacts.
+We strongly urge all scientists modeling the coronavirus disease 2019 (COVID-19) pandemic and its consequences for health and society to rapidly and openly publish their code (along with specifying the type of data required, model parameterizations, and any available documentation) so that it is accessible to all scientists around the world. We offer sincere thanks to the many teams that are already sharing their models openly. Proprietary black boxes and code withheld for competitive motivations have no place in the global crisis we face today. As soon as possible, please place your code in a trusted digital repository (CoMSES Network) so that it is findable, accessible, interoperable, and reusable.</p>
+</div>
+
+
+
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script>
+    var url_str;
+    var uid_news;
+    window.onload = function () {
+        url_str = GetRequest();
+        uid_news = sessionStorage.getItem("uid_news");
+        if (url_str["uid"] != null) {
+            var uid = url_str["uid"];
+            // data_by_db(uid);
+            data_by_json(uid);
+        } else if (uid_news != null) {
+            data_by_json("");
+        } else {
+            $("#title").html("404");
+            $("#introduction").html("请以正确的方式打开");
+        }
+    }
+
+    function GetRequest() {//获取url中"?"符后的字串
+        var url = location.search;
+        console.log("地址：" + url);
+
+        //截取url中的参数保存在theRequest数组中
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+            }
+        }
+        console.log("theRequest:" + theRequest["index"]);
+        return theRequest;
+    }
+
+
+    var result;
+
+    function data_by_json(uid) {
+        $.ajax({
+            type: "get",
+            async: false,
+            url: "json/newsInfo.json",
+            dataType: "json",//jsonp数据类型
+            success: function (data) {
+                result = data;
+                console.log(result);
+                create2(uid);
+            },
+            error: function () {
+                alert('fail');
+            }
+        })
+    }
+
+    function data_by_db(uid) {
+        $.ajax({
+            type: "get",
+            async: false,
+            url: "/GetNewsInfoServlet",
+            data: {uid: uid},
+            dataType: "json",//jsonp数据类型
+            success: function (data) {
+                result = data;
+                console.log(result);
+                create_news(result);
+            },
+            error: function () {
+                alert('fail');
+            }
+        })
+    }
+
+    function create_news(newsData) {
+        $("#title").html(newsData.title);
+        $("#time").html(newsData.date);
+        $("#introduction").html(newsData.introduction);
+        $("#event").html(newsData.event);
+        $("#result").html(newsData.result);
+
+
+        var paths = new Array();
+        //var o_path = "images/news/1527758113440.jpg;images/news/ye.jpg;images/news/jiang.jpg;images/news/sixth.jpg";
+        // o_path = "images/news/1527758113440.jpg;images/news/ye.jpg;images/news/jiang.jpg;";
+        //var o_path = "images/news/1527758113440.jpg";
+        var o_path = newsData.imagepath;
+        paths = o_path.split(";");
+        if (paths.length == 0) {
+            return;
+        } else if (paths.length == 1) {
+            if(paths[0]!=""){
+                var ul_container = document.getElementById("img_container");
+                ul_container.style.cssText = "display:none";
+
+                var div_one = document.getElementById("div_one");
+                div_one.style.cssText = "text-align:center";
+                var img = document.createElement("img");
+                img.src = paths[0];
+                img.style.cssText="width:400px;height:300px";
+                div_one.appendChild(img);
+                var imgs = document.getElementById("div_one").getElementsByTagName("img");
+            }else{
+                $("#div_one").css({ "display": "none" });
+            }
+        } else {
+            for (j = 0; j < paths.length; j++) {
+                if (paths[j] != null && paths[j] != "") {
+                    var ul_container = document.getElementById("img_container");
+                    var li = document.createElement("li");
+                    var a_img = document.createElement("a");
+                    var img = document.createElement("img");
+                    img.src = paths[j];
+                    a_img.appendChild(img);
+                    li.appendChild(a_img);
+                    ul_container.appendChild(li);
+                }
+            }
+            var box0 = $(".one"), v0 = 1; //这里添加滚动的对象和其速率
+            Rin(box0, v0);
+            var imgs = document.getElementById("img_container").getElementsByTagName("img");
+        }
+
+        var lens = imgs.length;
+        var popup = document.getElementById("popup");
+        for(var i = 0; i < lens; i++){
+            imgs[i].onclick = function (event){
+                event = event||window.event;
+                var target = document.elementFromPoint(event.clientX, event.clientY);
+                showBig(target.src);
+            }
+        }
+        popup.onclick = function (){
+            popup.style.display = "none";
+        }
+    }
+
+
+    function create2(uid) {
+        var uid_news="";
+        if(!uid){
+            uid_news = sessionStorage.getItem("uid_news");
+        }else{
+            uid_news = uid;
+        }
+
+        // console.log(uid_news);
+        for (i = 0; i < result.length; i++) {
+            if (result[i].uid === uid_news) {
+                create_news(result[i]);
+            }
+        }
+    }
+
+
+    function Rin($Box, v) {//$Box移动的对象，v对象移动的速率
+        var $Box_ul = $Box.find("ul"),
+            $Box_li = $Box_ul.find("li"),
+            $Box_li_span = $Box_li.find("span"),
+            left = 0,
+            s = 0,
+            timer;//定时器
+
+        $Box_li.each(function (index) {
+            $($Box_li_span[index]).width($(this).width());//hover
+            s += $(this).outerWidth(true); //即要滚动的长度
+        })
+
+        window.requestAnimationFrame = window.requestAnimationFrame || function (Tmove) {
+            return setTimeout(Tmove, 1000 / 60)
+        };
+        window.cancelAnimationFrame = window.cancelAnimationFrame || clearTimeout;
+
+        if (s >= $Box.width()) {//如果滚动长度超出Box长度即开始滚动，没有的话就不执行滚动
+            $Box_li.clone(true).appendTo($Box_ul);
+            Tmove();
+
+            function Tmove() {
+                //运动是移动left  从0到-s;（个人习惯往左滚）
+                left -= v;
+                if (left <= -s) {
+                    left = 0;
+                    $Box_ul.css("left", left)
+                } else {
+                    $Box_ul.css("left", left)
+                }
+                timer = requestAnimationFrame(Tmove);
+            }
+
+            $Box_ul.hover(function () {
+                cancelAnimationFrame(timer)
+            }, function () {
+                Tmove()
+            })
+        }
+    }
+
+
+
+    function showBig(src){
+        popup.getElementsByTagName("img")[0].src = src;
+        popup.style.display = "block";
+    }
+
+</script>
+
+</body></html>

@@ -1,13 +1,19 @@
-let arr = [1,2,3,4,5,4,3,2];
-var newArr = arr.reduce(function (prev, cur) {
-    prev.indexOf(cur) === -1 && prev.push(cur);
-    return prev;
-},[]);
-console.log(newArr)
+function bfind(arr, val) {
+    let right = arr.length - 1;
+    let left = 0;
+    while (left <= right) {
+        let mid = Math.floor((right + left)/2);
+        if (arr[mid] < val) {
+            left = mid + 1;
+        } else if (arr[mid] > val) {
+            right = mid-1;
+        }else{
+            return mid;
+        }
+    }
+    return -1;
+}
 
-var myArr = arr.reduce((pre,cur,index,arr)=>{
-    pre.indexOf(cur)===-1 && pre.push(cur);
-    return pre;
-},[])
+let a = [1,2,3,4,5,7,8,9]
 
-console.log(myArr);
+console.log(bfind(a,6))

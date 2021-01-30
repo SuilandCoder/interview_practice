@@ -34,9 +34,9 @@ function kmp(str1, str2) {
     }
 
 }
-let a = "abba"
+let a = "qw"
 // next = []
 // getNext(a, next);
 // console.log(next);
-let b = "abbaabbaaba"
+let b = "eidwqooo"
 console.log(kmp(b,a))

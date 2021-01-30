@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./jquery-3.4.1.min.js"></script>
+    <script>
+        var flag = false;
+        $.ajax({
+            url:'./test.json',
+            dataType:'json',
+            success:function(data,status,xhr){
+                console.log('1:'+flag);
+                flag = true;
+                console.log("2:"+flag);
+            },
+            error:function(){
+                alert("Error:(ajax) get menu falled");
+            }
+        })
+        console.log("3:" + flag);
+    </script>
+</body>
+</html>

@@ -9,14 +9,16 @@
 
 <body>
     <canvas id="canvas"></canvas>
+    <div>地球上过了<span id='day_span'>0</span>天啦</div>
     <button id="stopBtn">别转了</button>
     <button id="startBtn">动起来</button>
     <script>
-        const rate = 30;
-        const ROTATE_SPEED = 365 / rate;
-        const REVOLUTION_SPEED = 1 / rate;
+        const rate = 5;
+        const ROTATE_SPEED = 360/rate;
+        
+        const REVOLUTION_SPEED = 360/(rate*365);
         var day = 0;
-        var time = 1;
+        var time = 0;
         var timer;
         var earthImg = new Image();
         earthImg.src = '../assets/img/地球.svg';
@@ -36,25 +38,22 @@
                 cxt.stroke()
                 cxt.closePath();
                 cxt.drawImage(earthImg, 470, 520, 60, 60);
-
-                // timer = requestAnimationFrame(function fn() {
-                //     run(cxt);
-                //     timer = requestAnimationFrame(fn);
-                // })
-                // start();
-
                 document.getElementById('startBtn').onclick =start;
-
+                day_span = document.getElementById('day_span');
                 var stopBtn = document.getElementById('stopBtn');
                 stopBtn.onclick = stop;
 
                 function start() {
                     timer = requestAnimationFrame(function fn() {
-                        run(cxt);
                         time++;
+                        run(cxt);
                         timer = requestAnimationFrame(fn);
-                        if(time%30===0){                     
-                            stop();                
+                        // if(time%720===0) stop();
+                        if(time%5===0){
+                            day++;
+                            // stop();
+                            day_span.innerHTML=day;
+                            if(day%10===0) stop();
                         }
                     })
                 }
@@ -67,6 +66,7 @@
         }
 
         function run(cxt) {
+            // console.log("run!!!");
             cxt.clearRect(0, 0, 1024, 728);
             drawNotChange(cxt);
             cxt.save();//将当前以左上角坐标为(0,0)的上下文环境进行保存，这样是为了在接下来中要进行画布偏移后，可以进行还原当前的环境
@@ -84,8 +84,17 @@
 
             cxt.translate(0, 150);
             // cxt.rotate(-2 * Math.PI / 6 * time.getSeconds() - 2 * Math.PI / 6000 * time.getMilliseconds());
+            console.log("旋转角度：", time * ROTATE_SPEED%360)
             cxt.rotate(-time * ROTATE_SPEED * Math.PI / 180);
-            cxt.drawImage(earthImg, -30, -30, 60, 60);
+            cxt.drawImage(earthImg, -30, -30, 60, 60); 
+
+            cxt.translate(0, 0);
+            // cxt.rotate(0);
+            cxt.beginPath();
+            cxt.moveTo(0, 0);
+            cxt.lineTo(0, -50);
+            cxt.stroke()
+            cxt.closePath();
             cxt.restore();
         }
 
