@@ -90,7 +90,7 @@ if (typeof Object.myassign2 !== 'function') {
 // console.log(c)
 
 
-
+ 
 //* 先判断 Object 上是否已经定义了该方法
 if (typeof Object.myassign3 !== 'function') {
     Object.prototype.myassign3 = function (target) { // 用prototype挂载也是可枚举的
