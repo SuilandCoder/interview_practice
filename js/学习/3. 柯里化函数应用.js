@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: SongJ
+ * @Date: 2020-07-20 10:48:16
+ * @LastEditTime: 2021-02-06 19:56:12
+ * @LastEditors: SongJ
+ */
 /**
  * add(1)(2)(3).sum();
  * add(1,2).sum();
@@ -50,3 +57,43 @@ let add2 = function(){
 
  console.log(add2(1,2)(2,3,4).sum());
  console.log(add2(1,2,3)(4).sum());
+
+
+ /**
+  * 实现 柯里化函数构造器：
+  */
+function curry(fn, args){ 
+    let length = fn.length;
+    args = args || [];
+    return function(){
+        let _args = Array.prototype.slice.call(args);
+        _args = [...args,...arguments];
+        if(_args.length<length){
+            return curry.call(this,fn,_args);
+        }else{
+            return fn.apply(this,_args);
+        }
+    }
+}
+  
+
+
+
+function trueCurrying(fn, ...args) {
+    if (args.length >= fn.length) {
+        return fn(...args)
+    }
+    return function (...args2) {
+        return trueCurrying(fn, ...args, ...args2)
+    }
+}
+
+
+var fn = trueCurrying(function(a, b, c) {
+    console.log([a, b, c]);
+});
+
+fn("a", "b", "c") // ["a", "b", "c"]
+fn("a", "b")("c") // ["a", "b", "c"]
+fn("a")("b")("c") // ["a", "b", "c"]
+fn("a")("b", "c") // ["a", "b", "c"]

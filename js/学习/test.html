@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: SongJ
+ * @Date: 2020-07-16 18:43:25
+ * @LastEditTime: 2021-02-06 21:07:27
+ * @LastEditors: SongJ
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,21 +17,45 @@
 <body>
 
     <script>
-        // console.log(fun)
+        function Foo() {
+            getName = function () {
+                alert(1);
+            };
+            return this;
+        }
+        Foo.getName = function () {
+            alert(2);
+        };
+        Foo.prototype.getName = function () {
+            alert(3);
+        };
+        var getName = function () {
+            alert(4);
+        };
+        function getName() {
+            alert(5);
+        }
 
-        // console.log(person)
+        //请写出以下输出结果：
+        Foo.getName();
+        getName();
+        Foo().getName();
+        getName();
+        new Foo.getName();
+        new Foo().getName();
+        new new Foo().getName();
     </script>
 
     <script>
-        setTimeout(() => {
-            Promise.resolve(1).then(console.log);
-        }, 0);
+        // setTimeout(() => {
+        //     Promise.resolve(1).then(console.log);
+        // }, 0);
 
-        setTimeout(() => {
-            console.log(2);
-        }, 0);
+        // setTimeout(() => {
+        //     console.log(2);
+        // }, 0);
 
-        console.log(3);
+        // console.log(3);
     </script>
 </body>
 
